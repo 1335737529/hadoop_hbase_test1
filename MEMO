@@ -1,0 +1,26 @@
+
+var dateReg = /^(\d{4})-(\d{2})-(\d{2})$/;
+ 
+function verifyDate(dateStr, dateReg){
+    //日期格式不匹配
+    if( !dateReg.test(dateStr) ){
+        return false;
+    }
+ 
+    //使用捕获组获取日期
+    var date = {
+        year : RegExp.$1,
+        month : RegExp.$2,
+        day : RegExp.$3,
+    }
+ 
+    //使用 Date() 对象，新建对象时会将日期转化为合法日期
+    //比如 2020-02-30 被转化为 2020-3-1
+    var dateObj = new Date(date.year, date.month-1, date.day);
+ 
+    if( date.year != dateObj.getFullYear() || date.month != dateObj.getMonth()+1 || date.day != dateObj.getDate() ){
+        return false;
+    }
+ 
+    return true;
+}
