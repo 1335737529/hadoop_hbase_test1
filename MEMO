@@ -21,6 +21,6 @@ function verifyDate(dateStr, dateReg){
     if( date.year != dateObj.getFullYear() || date.month != dateObj.getMonth()+1 || date.day != dateObj.getDate() ){
         return false;
     }
- 
+ \\192.168.41.87\Users\dev_admin\Documents\CP共有\01_受領\CPマスターデータ￥評価項目管理マスタデータ_OE追加版.xlsx
     return true;
 }
