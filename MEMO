@@ -20,6 +20,6 @@ function verifyDate(dateStr, dateReg){
  
     if( date.year != dateObj.getFullYear() || date.month != dateObj.getMonth()+1 || date.day != dateObj.getDate() ){
         return false;
-    }
+    }fujikawa_kenichi@toyosystem.co.jp
     return true;
 }
