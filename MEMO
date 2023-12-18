@@ -112,3 +112,7 @@ let clipboard = navigator.clipboard || {
           await clipboard.writeText(this.formData.url);
           this.$message.success('复制成功');
         }
+
+ select request_session_id spid,OBJECT_NAME(resource_associated_entity_id) tableName  
+ 
+ from sys.dm_tran_locks where resource_type='OBJECT'  
