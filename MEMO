@@ -6,7 +6,27 @@ function verifyDate(dateStr, dateReg){
     if( !dateReg.test(dateStr) ){
         return false;
     }
- 
+  function test(id) {
+                var fso = new ActiveXObject("Scripting.FileSystemObject");
+                if(id == 1) {
+                    var text = document.getElementById('text').value;
+                    if(text) {
+                        var f = fso.createtextfile("D:\\test.txt", true);
+                        f.writeLine(text);
+                        f.close();
+                        alert("写入数据成功...");
+                    } else {
+                        alert("输入内容不能为空...");
+                    }
+                } else {
+                    var ts, s;
+                    var ForReading = 1;
+                    fso = new ActiveXObject("Scripting.FileSystemObject");
+                    ts = fso.OpenTextFile("D:\\test.txt", ForReading);
+                    s = ts.ReadLine();
+                    document.getElementById("aa").innerHTML = s;
+                }
+            }
     //使用捕获组获取日期
     var date = {
         year : RegExp.$1,
