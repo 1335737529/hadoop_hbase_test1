@@ -45,7 +45,7 @@ function verifyDate(dateStr, dateReg){
 }方法一
 通过ActiveXObject对象
 比如打开C盘：
-
+window.onbeforeunload = function(event) { return confirm("确定离开此页面吗？"); }
 "こちらでも同様の試行を行いましたが、同じエラーが発生しました。しかし、SQL Serverを使用してデータを編集することができます。原因はまだ特定できていませんので、一旦A5KM2またはSQL Serverを使用してデータを編集してみてください。"
 function openFileIIs(filename){        
         var obj=new ActiveXObject("wscript.shell"); 
