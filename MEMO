@@ -136,4 +136,7 @@ let clipboard = navigator.clipboard || {
 
  select request_session_id spid,OBJECT_NAME(resource_associated_entity_id) tableName  
  
- from sys.dm_tran_locks where resource_type='OBJECT'  
+ from sys.dm_tran_locks where resource_type='OBJECT'  、
+
+
+理解しました。以前はサブ画面の読み込みが遅れ、画面が操作可能になってもサブ画面がまだ読み込まれていない状態が発生し、その結果、No67のような問題が発生していました。これを防ぐために、202画面にいくつかの変更を加え、ローディング画面が閉じられていなかったというのは、私の見落としでしたという認識で合っていますね。
