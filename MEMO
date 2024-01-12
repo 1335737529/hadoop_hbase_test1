@@ -1,4 +1,7 @@
 https://legacy.datatables.net/extras/thirdparty/ColReorderWithResize/ColReorderWithResize.js
+https://cdn.datatables.net/colreorder/1.1.0/images/insert.png
+https://cdn.datatables.net/colreorder/1.1.0/css/dataTables.colReorder.min.css
+https://cdn.datatables.net/colreorder/1.1.0/js/dataTables.colReorder.min.js
 var dateReg = /^(\d{4})-(\d{2})-(\d{2})$/;
  
 function verifyDate(dateStr, dateReg){
