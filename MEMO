@@ -1,147 +1,23 @@
-https://legacy.datatables.net/extras/thirdparty/ColReorderWithResize/ColReorderWithResize.js
-https://cdn.datatables.net/colreorder/1.1.0/images/insert.png
-https://cdn.datatables.net/colreorder/1.1.0/css/dataTables.colReorder.min.css
-https://cdn.datatables.net/colreorder/1.1.0/js/dataTables.colReorder.min.js
-var dateReg = /^(\d{4})-(\d{2})-(\d{2})$/;
- https://datatables.net/download/
-function verifyDate(dateStr, dateReg){
-    //日期格式不匹配
-    if( !dateReg.test(dateStr) ){
-        return false;
-    }
-  function test(id) {
-                var fso = new ActiveXObject("Scripting.FileSystemObject");
-                if(id == 1) {
-                    var text = document.getElementById('text').value;
-                    if(text) {
-                        var f = fso.createtextfile("D:\\test.txt", true);
-                        f.writeLine(text);
-                        f.close();
-                        alert("写入数据成功...");
-                    } else {
-                        alert("输入内容不能为空...");
-                    }
-                } else {
-                    var ts, s;
-                    var ForReading = 1;
-                    fso = new ActiveXObject("Scripting.FileSystemObject");
-                    ts = fso.OpenTextFile("D:\\test.txt", ForReading);
-                    s = ts.ReadLine();
-                    document.getElementById("aa").innerHTML = s;
-                }
-            }
-    //使用捕获组获取日期
-    var date = {
-        year : RegExp.$1,
-        month : RegExp.$2,
-        day : RegExp.$3,
-    }
- 
-    //使用 Date() 对象，新建对象时会将日期转化为合法日期
-    //比如 2020-02-30 被转化为 2020-3-1
-    var dateObj = new Date(date.year, date.month-1, date.day);
- 
-    if( date.year != dateObj.getFullYear() || date.month != dateObj.getMonth()+1 || date.day != dateObj.getDate() ){
-        return false;
-    }
-    return true;
-}方法一
-通过ActiveXObject对象
-比如打开C盘：
-window.onbeforeunload = function(event) { return confirm("确定离开此页面吗？"); }
-"こちらでも同様の試行を行いましたが、同じエラーが発生しました。しかし、SQL Serverを使用してデータを編集することができます。原因はまだ特定できていませんので、一旦A5KM2またはSQL Serverを使用してデータを編集してみてください。"
-function openFileIIs(filename){        
-        var obj=new ActiveXObject("wscript.shell"); 
-         if(obj){ 
-             obj.Run("\""+filename+"\"", 1, false );
-              //obj.run("osk");/*打开屏幕键盘*/
-              //obj.Run('"'+filename+'"'); 
-              obj=null; 
-            } 
+// 获取滚动条占用的高度
+function getScrollbarHeight() {
+  // 创建一个临时的div元素
+  var scrollDiv = document.createElement("div");
+  // 设置div的样式，包括设置宽度和高度，同时设置overflow为scroll
+  scrollDiv.style.width = "100px";
+  scrollDiv.style.height = "100px";
+  scrollDiv.style.overflow = "scroll";
+  // 将div添加到文档中
+  document.body.appendChild(scrollDiv);
 
-    }
+  // 计算滚动条占用的高度
+  var scrollbarHeight = scrollDiv.offsetHeight - scrollDiv.clientHeight;
 
-方法二
-设置一个不可见的input标签，通过input上面的webkitdirectory 属性打开本地文件，我写的是vue3用法：
+  // 从文档中移除临时的div元素
+  document.body.removeChild(scrollDiv);
 
- <div  class=" button-common" @click="importFile()">导入
-              <input  v-show="false"
-                     ref="inputFile"
-                      id="file"
-                     type="file"
-                      webkitdirectory                    
-                    />
-               </div>
-
-export default {
-...
-	setup(){
-	//手动给input绑定事件
-	 function importFile() 
-            this.$refs.inputFile.dispatchEvent(new MouseEvent('click'))
-        }
-	return{
-	importFile
-	}
-	}
+  return scrollbarHeight;
 }
 
-方法三
-设置一个不可见的input标签，通过input上面的multiple 属性打开本地文件，我写的是vue3用法：这个属性与webkitdirectory 的具体区别可以百度看看
-
- <div  class="import-btn button-common" @click="importStudy()"导入
-                  <input  type="file" ref="file" multiple="multiple" @change="onInputFileChange"
-                    />
-               </div>
-
-export default {
-...
-	setup(){
-	//手动给input绑定事件
-	 function importFile() 
-            this.$refs.inputFile.dispatchEvent(new MouseEvent('click'))
-        }
-	return{
-	importFile
-	}
-	}
-}
-
-方法四
-给自己定义的按钮添加下面代码，通过创建一个不可见的input标签实现
-
- <div  class=" button-common" @click="importFile()">导入</div>
-1
- function importFile() {
-  		var inputObj=document.createElement('input')
-        inputObj.setAttribute('id','_ef');
-        inputObj.setAttribute('type','file');
-        inputObj.setAttribute("style",'visibility:hidden');
-        document.body.appendChild(inputObj);
-        inputObj.click();
-        inputObj.value ;
-   }
-
-let clipboard = navigator.clipboard || {
-          writeText: (text) => {
-            let copyInput = document.createElement('input');
-            copyInput.value = text;
-            document.body.appendChild(copyInput);
-            copyInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(copyInput);
-          }
-        }
-        if (clipboard) {
-          await clipboard.writeText(this.formData.url);
-          this.$message.success('复制成功');
-        }
-
- select request_session_id spid,OBJECT_NAME(resource_associated_entity_id) tableName  
- 
- from sys.dm_tran_locks where resource_type='OBJECT'  、
-さらなる調査で明らかになったのは、以前の課題に対応する際、すべての画面の最前面に権限のチェックを追加したことが、子画面の読み込みも遅くなってしまった可能性があるということです。
-現在は、メイン画面にのみ権限チェックを行うように変更しました。これにより、BCP202画面の読み込み速度も向上しました。
-
-キャッシュ機能を無効にしました。これにより、常に最新の内容が取得されますが、本番版では有効にする必要があります
-理解しました。以前はサブ画面の読み込みが遅れ、画面が操作可能になってもサブ画面がまだ読み込まれていない状態が発生し、その結果、No67のような問題が発生していました。これを防ぐために、202画面にいくつかの変更を加え、ローディング画面が閉じられていなかったというのは、私の見落としでしたという認識で合っていますね。
+// 调用函数获取滚动条占用的高度
+var scrollbarHeight = getScrollbarHeight();
+console.log("滚动条占用的高度：" + scrollbarHeight + " 像素");
