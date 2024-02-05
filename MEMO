@@ -23,7 +23,7 @@ var scrollbarHeight = getScrollbarHeight();
 console.log("滚动条占用的高度：" + scrollbarHeight + " 像素");
 
 如果因为忘记确认邮件而错过了会议，您可以通过电子邮件向会议组织者发送道歉邮件。以下是一个示例：
-
+=IF(ISNUMBER(--LEFT(A2)),TRANSPOSE(A3:A7),"")
 css
 Copy code
 件名：[会议主题]に参加できなかったことをお詫びします
