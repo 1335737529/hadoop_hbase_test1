@@ -1,3 +1,9 @@
+
+function globalErrorHandle(msg,url,l,c,error) {
+		console.error("global js error: ", msg, l);
+      		// TODO other things.
+	}
+	window.onerror = globalErrorHandle;
 規格の関連がないにもかかわらず、戻り値には規格が空であるデータも含まれているようです。
 一行で表示し、超える部分は非表示にし、詳細な国の情報はサブ画面で確認できるようにします。
 // 获取滚动条占用的高度
