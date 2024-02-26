@@ -1,4 +1,5 @@
 
+以前の課題79で検索条件が変更され、以下の5つに変更されました。現在、APIの返り値にこれらの項目がすべて空であるため、一致する評価プロジェクトがありません。
 function globalErrorHandle(msg,url,l,c,error) {
 		console.error("global js error: ", msg, l);
       		// TODO other things.
