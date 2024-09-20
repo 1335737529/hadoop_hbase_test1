@@ -1,9 +1,32 @@
-网上下载到的是一个zip压缩文件，可以右键点击压缩文件，
+ 17:02:24
+="SELECT * FROM TS_R117_SIZEDATA WHERE" & $B$2 & " = '' &B5&"' AND " & $D$2 & " = '" & D5 &''' AND " & $E$2 & " = '''& E5 &''' AND " & $F$2 & "= ''' & F5 &"' AND " & $G$2 & " = '' & G5 &
+''AND" & $袧$2 & "= '' & H5 &"'' AND " & $Q$2 & " = '' & Q5 &' AND " & $R$2 & "= ''& R5 &";"
 
-在弹出的菜单中选 “全部提取(T)...” 进行解压，
+ 17:03:20
+= "INSERT INTO TS_R117_SIZEDATA ('"& B5&","&C5&","&D5&","&E5&","&F5&","&G5&","&H5&","&]5&","&J5&","&K5&""&LS&","&M5&","&N5&","&05&"&P5&","&Q5&" "&R"' "&
+55 &');"
 
-然后在弹出的文件夹里面运行 shubiao（.exe） 就可以使用了。
+ 17:03:52
+Sub MakeExt InsertSalO
+Sheets ("OUTPUT_TS_R117_EXTDATA*) .Select
+Dim rowCntMain As Integer
+Dim colChtMain As Integer
+rowCntMain = Sheets ("OUTPUT_TS_R117_EXTDATA").Cel Is (Rows-Count, 4) End (x|Up) 鈥ow col CntMain = ActiveSheet.Cells2, Columns.Count) 鈥nd(x|ToLeft) .Column - 3
+Dim insertSal As String
+Dim cell As String
+For i = 3 To rowCntMain
+Inser Sape PO SEA TNTO TSP11T EXTOATA VALUES ("
+insertSal =
+For j = 2 To colChtMain
+cell = ActiveSheet .Cells(i, j) Value
+insert colonthan fhen ''' + ell +"*
+insertSal = insertSal + ");"
+Else
+insertSal = insertSal + ","
+End If
+Next j
+ActiveSheet .Cells(i, 31) = insertSql
+Next ill
+Act i velorkbook 鈥ave
+End Sub
 
-
-
-如果录制时提示 “写文件失败” 一般都是没有解压，点击压缩文件里面的程序直接运行所致。
