@@ -1,9 +1,0 @@
-$file = 'C:\path\to\yourfile.txt'
-
-$date = Get-Date "2023-01-01"
-
-Set-ItemProperty -Path $file -Name CreationTime -Value $date
-
-Set-ItemProperty -Path $file -Name LastWriteTime -Value $date
-
-Set-ItemProperty -Path $file -Name LastAccessTime -Value $date
