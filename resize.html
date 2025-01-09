@@ -1,106 +1,36 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-    <meta charset="gbk">
-    <title>table</title>
-</head>
-
-<body>
-    <table id="tb_1" cellspacing="0" cellpadding="2" width="2000px" border="1">
-        <tbody>
-            <tr align="center" bgcolor="#dcdcdc">
-                <td style="width:100px;">用户编号</td>
-                <td>试用时间</td>
-                <td>转正时间</td>
-                <td>性别</td>
-                <td>姓名拼音</td>
-                <td>生日时间</td>
-                <td>民族</td>
-                <td>身高</td>
-            </tr>
-            <tr>
-                <td>2000001</td>
-                <td>1997-3-13</td>
-                <td>1997-3-13</td>
-                <td>1</td>
-                <td>WZJ</td>
-                <td>1965-3-13</td>
-                <td>汉</td>
-                <td>171</td>
-            </tr>
-            <tr>
-                <td>2000045</td>
-                <td>2001-2-15</td>
-                <td>2001-3-15</td>
-                <td>0</td>
-                <td>WY</td>
-                <td>1978-8-5</td>
-                <td>汉</td>
-                <td>162</td>
-            </tr>
-            <tr>
-                <td>2000046</td>
-                <td>2001-2-23</td>
-                <td>2001-3-23</td>
-                <td>0</td>
-                <td>LQ</td>
-                <td>2001-2-23</td>
-                <td>汉</td>
-                <td>171</td>
-            </tr>
-        </tbody>
-    </table>
-    <script type="text/javascript">
-        var tTD; //用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题 
-        var table = document.getElementById("tb_1");
-        for (j = 0; j < table.rows[0].cells.length; j++) {
-            table.rows[0].cells[j].onmousedown = function () {
-                //记录单元格 
-                tTD = this;
-                if (event.offsetX > tTD.offsetWidth - 10) {
-                    tTD.mouseDown = true;
-                    tTD.oldX = event.x;
-                    tTD.oldWidth = tTD.offsetWidth;
-                }
-                //记录Table宽度 
-                //table = tTD; while (table.tagName != ‘TABLE') table = table.parentElement; 
-                //tTD.tableWidth = table.offsetWidth; 
-            };
-            table.rows[0].cells[j].onmouseup = function () {
-                //结束宽度调整 
-                if (tTD == undefined) tTD = this;
-                tTD.mouseDown = false;
-                tTD.style.cursor = 'default';
-            };
-            table.rows[0].cells[j].onmousemove = function () {
-                //更改鼠标样式 
-                if (event.offsetX > this.offsetWidth - 10)
-                    this.style.cursor = 'col-resize';
-                else
-                    this.style.cursor = 'default';
-                //取出暂存的Table Cell 
-                if (tTD == undefined) tTD = this;
-                //调整宽度 
-                if (tTD.mouseDown != null && tTD.mouseDown == true) {
-                    tTD.style.cursor = 'default';
-                    if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
-                        tTD.width = tTD.oldWidth + (event.x - tTD.oldX);
-                    //调整列宽 
-                    tTD.style.width = tTD.width;
-                    tTD.style.cursor = 'col-resize';
-                    //调整该列中的每个Cell 
-                    table = tTD; while (table.tagName != 'TABLE') table = table.parentElement;
-                    for (j = 0; j < table.rows.length; j++) {
-                        table.rows[j].cells[tTD.cellIndex].width = tTD.width;
-                    }
-                    //调整整个表 
-                    //table.width = tTD.tableWidth + (tTD.offsetWidth – tTD.oldWidth); 
-                    //table.style.width = table.width; 
-                }
-            };
-        } 
-    </script>
-</body>
-
-</html>
+Sub ConvertRangeToImageAndPlace()
+    Dim ws As Worksheet
+    Dim rng As Range
+    Dim pic As Picture
+    Dim tempChart As ChartObject
+    Dim targetCell As Range
+    
+    ' 设置工作表和范围
+    Set ws = ThisWorkbook.Sheets("Sheet1") ' 修改为你的工作表名称
+    Set rng = ws.Range("A1:C5") ' 修改为要转换为图片的单元格范围
+    Set targetCell = ws.Range("E1") ' 修改为图片插入的位置（左上角单元格）
+    
+    ' 创建临时图表以保存为图片
+    Set tempChart = ws.ChartObjects.Add(Left:=rng.Left, Top:=rng.Top, Width:=rng.Width, Height:=rng.Height)
+    With tempChart
+        .Chart.ChartArea.Clear
+        rng.Copy
+        .Chart.Paste
+        .Chart.Export Filename:=Environ("Temp") & "\TempImage.png", FilterName:="PNG"
+        .Delete
+    End With
+    
+    ' 插入图片到目标单元格位置
+    Set pic = ws.Pictures.Insert(Environ("Temp") & "\TempImage.png")
+    With pic
+        .Left = targetCell.Left
+        .Top = targetCell.Top
+        .Width = rng.Width
+        .Height = rng.Height
+    End With
+    
+    ' 清理临时图片文件
+    Kill Environ("Temp") & "\TempImage.png"
+    
+    MsgBox "图片已生成并插入到 " & targetCell.Address, vbInformation
+End Sub
