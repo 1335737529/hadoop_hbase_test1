@@ -1,36 +1,17 @@
-Sub ConvertRangeToImageAndPlace()
-    Dim ws As Worksheet
-    Dim rng As Range
-    Dim pic As Picture
-    Dim tempChart As ChartObject
-    Dim targetCell As Range
-    
-    ' 设置工作表和范围
-    Set ws = ThisWorkbook.Sheets("Sheet1") ' 修改为你的工作表名称
-    Set rng = ws.Range("A1:C5") ' 修改为要转换为图片的单元格范围
-    Set targetCell = ws.Range("E1") ' 修改为图片插入的位置（左上角单元格）
-    
-    ' 创建临时图表以保存为图片
-    Set tempChart = ws.ChartObjects.Add(Left:=rng.Left, Top:=rng.Top, Width:=rng.Width, Height:=rng.Height)
-    With tempChart
-        .Chart.ChartArea.Clear
-        rng.Copy
-        .Chart.Paste
-        .Chart.Export Filename:=Environ("Temp") & "\TempImage.png", FilterName:="PNG"
-        .Delete
-    End With
-    
-    ' 插入图片到目标单元格位置
-    Set pic = ws.Pictures.Insert(Environ("Temp") & "\TempImage.png")
-    With pic
-        .Left = targetCell.Left
-        .Top = targetCell.Top
-        .Width = rng.Width
-        .Height = rng.Height
-    End With
-    
-    ' 清理临时图片文件
-    Kill Environ("Temp") & "\TempImage.png"
-    
-    MsgBox "图片已生成并插入到 " & targetCell.Address, vbInformation
-End Sub
+PowerShell连接常规远程主机
+
+1. 在远程机器上以Administrator角色打开PowerShell执行以下命令，启动允许远程连接
+
+Enable-PsRemoting
+2. 在客户机器 (本地) 执行以下命令，将远程机器IP地址加入可信主机列表
+
+Set-Item wsman:\localhost\Client\TrustedHosts -value <Remote Host IP Address>
+3. 在客户机器 (本地) 输入以下命令, 在弹出对话框输入密码，以交互的方式连接远程主机
+
+Enter-PSSession -ComputerName <Remote Host IP Address> -Credential <UserName>
+4. PowerShell远程命令的基本使用见官方文档: Running Remote Commands
+
+Start an Interactive Session (Enter-PSSession and Exit-PSSession)
+Run a Remote Command / Script (Invoke-Command)
+Establish a Persistent Connection (New-PSSession)
+ 
