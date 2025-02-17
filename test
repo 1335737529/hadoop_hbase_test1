@@ -1,0 +1,24 @@
+Sub QQ1722187970()
+'   Dim oCM As CodeModule
+'   Dim oVC As VBComponent
+'   Dim oCMActive As CodeModule
+   Dim oWK As Worksheet
+   Set oWK = Excel.ThisWorkbook.Worksheets(1)
+   sName1 = oWK.CodeName
+   Set oVC1 = Excel.ThisWorkbook.VBProject.VBComponents(sName1)
+   sName2 = "modCommon"
+   Set oVC2 = Excel.ThisWorkbook.VBProject.VBComponents(sName2)
+   Set oCM1 = oVC1.CodeModule
+   Set oCM2 = oVC2.CodeModule
+   With oCM1
+        '获取所有的代码行数
+        ILine1 = .CountOfLines
+        '先删除之前的代码
+        .DeleteLines 1, ILine1
+        ILine2 = oCM2.CountOfLines
+        '获取所有的代码
+        strCode = oCM2.Lines(1, ILine2)
+        '添加代码
+        oCM1.AddFromString strCode
+   End With
+End Sub
