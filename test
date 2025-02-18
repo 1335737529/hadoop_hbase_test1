@@ -27,3 +27,11 @@ Public Sub ClearClip()
         Call EmptyClipboard
         Call CloseClipboard
 End Sub
+
+    Application.SendKeys "%{F11}", True
+      Application.SendKeys "%T", True
+      Application.SendKeys "e", True        
+      Application.SendKeys myPW, True
+      Application.SendKeys "{ENTER}", True
+      Application.SendKeys "{ENTER}", True
+      Application.SendKeys "%{F11}", True
