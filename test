@@ -35,3 +35,10 @@ End Sub
       Application.SendKeys "{ENTER}", True
       Application.SendKeys "{ENTER}", True
       Application.SendKeys "%{F11}", True
+
+If ThisWorkbook.VBProject.Protection = vbext_pp_locked Then '判断工程是否解锁
+      '打开VBAProject工程属性
+      Application.VBE.CommandBars(1).Controls("工具(T)").Controls("VBAProject 属性(&E)...").Execute
+      Application.SendKeys pw        '输入密码
+      Application.SendKeys "{ENTER}" 'enter解锁
+  End If
