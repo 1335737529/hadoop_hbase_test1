@@ -42,3 +42,21 @@ If ThisWorkbook.VBProject.Protection = vbext_pp_locked Then '判断工程是否�
       Application.SendKeys pw        '输入密码
       Application.SendKeys "{ENTER}" 'enter解锁
   End If
+ Dim VBProj As VBIDE.VBProject
+    Dim VBComp As VBIDE.VBComponent
+    Dim VBCode As VBIDE.CodeModule
+    Dim Password As String
+    
+    ' 设置密码
+    Password = "yourpassword"  ' 替换为实际的VBA项目密码
+    
+    ' 获取当前工作簿的VBA项目
+    Set VBProj = ThisWorkbook.VBProject
+    
+    ' 解锁VBA项目
+    VBProj.VBE.CommandBars("Menu Bar").Controls("Tools").Controls("VBAProject Properties...").Execute
+    Application.SendKeys Password & "~", True
+    Application.SendKeys "~", True
+    
+    ' 提示解锁成功
+    MsgBox "VBA项目已解锁！", vbInformation
