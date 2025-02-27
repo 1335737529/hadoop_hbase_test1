@@ -1,3 +1,6 @@
+
+
+管理者としてサーバーにログインした際、SQL Server Management Studio（SQL MANAGE）がまだ実行中で、終了していない可能性があります。SQL Server Management Studioは定期的に接続状態を確認しているかもしれません。
 Private Declare PtrSafe Function IsClipboardFormatAvailable Lib "user32" (ByVal wFormat As Long) As Long
 Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long) 
 
